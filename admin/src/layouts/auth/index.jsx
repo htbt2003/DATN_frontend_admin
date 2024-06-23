@@ -1,10 +1,10 @@
 import Footer from "components/footer/FooterAuthDefault";
 import authImg from "assets/img/auth/auth.png";
-import { Link, Routes, Route, Navigate } from "react-router-dom";
+import { Link, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import routes from "routes.js";
 import FixedPlugin from "components/fixedPlugin/FixedPlugin";
 
-export default function Auth() {
+export default function LayoutAuth() {
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/auth") {
@@ -44,13 +44,7 @@ export default function Auth() {
                     </p>
                   </div>
                 </Link>
-                <Routes>
-                  {getRoutes(routes)}
-                  <Route
-                    path="/"
-                    element={<Navigate to="/auth/sign-in" replace />}
-                  />
-                </Routes>
+               <Outlet/>
                 <div className="absolute right-0 hidden h-full min-h-screen md:block lg:w-[49vw] 2xl:w-[44vw]">
                   <div
                     className="absolute flex h-full w-full items-end justify-center bg-cover bg-center lg:rounded-bl-[120px] xl:rounded-bl-[200px]"
