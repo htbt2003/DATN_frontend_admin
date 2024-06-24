@@ -4,7 +4,7 @@ import httpAxios from "../httpAxios";
 const ConfigServices = {
     update:(data) =>
     {
-        return httpAxios.post("config/update/", data);
+        return httpAxios.post("config/update", data);
     },
     show:() =>
     {

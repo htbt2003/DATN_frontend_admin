@@ -12,8 +12,8 @@ import {
 } from "react-icons/io";
 import avatar from "assets/img/avatars/avatar4.png";
 
-const Navbar = (props) => {
-  const { onOpenSidenav, brandText } = props;
+const Navbar = () => {
+  // const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
 
   return (
@@ -30,21 +30,21 @@ const Navbar = (props) => {
               /{" "}
             </span>
           </a>
-          <Link
+          {/* <Link
             className="text-sm font-normal capitalize text-navy-700 hover:underline dark:text-white dark:hover:text-white"
             to="#"
           >
             {brandText}
-          </Link>
+          </Link> */}
         </div>
-        <p className="shrink text-[33px] capitalize text-navy-700 dark:text-white">
+        {/* <p className="shrink text-[33px] capitalize text-navy-700 dark:text-white">
           <Link
             to="#"
             className="font-bold capitalize hover:text-navy-700 dark:hover:text-white"
           >
             {brandText}
           </Link>
-        </p>
+        </p> */}
       </div>
 
       <div className="relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-shadow-500 dark:!bg-navy-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
@@ -60,7 +60,7 @@ const Navbar = (props) => {
         </div>
         <span
           className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
-          onClick={onOpenSidenav}
+          // onClick={onOpenSidenav}
         >
           <FiAlignJustify className="h-5 w-5" />
         </span>

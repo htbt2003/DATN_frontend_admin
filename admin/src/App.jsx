@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 // import RtlLayout from "layouts/rtl";
 // import AdminLayout from "layouts/admin";
@@ -7,11 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import SignIn from "views/auth/SignIn";
 import LayoutAuth from "layouts/auth";
 import LayoutAdmin from "layouts/admin";
-import SignIn from "./views/auth/SignIn";
-
+import RouterApp from "router";
+import {jwtDecode} from 'jwt-decode';
+import { clearAuth } from './redux/authSlice';
 const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const user = useSelector((state) => state.auth.user);
   var timeToken = "";
   
   useEffect(() => {
@@ -35,7 +37,7 @@ const App = () => {
 
   return (
     <Routes>
-        {!user ? (
+        {!token ? (
           <>
             <Route path="/" element={<Navigate to="/auth/sign-in" />} />
             <Route path="/auth" element={<LayoutAuth />}>

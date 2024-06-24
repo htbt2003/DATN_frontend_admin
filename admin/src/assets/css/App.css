@@ -6,3 +6,10 @@ body {
 option {
 	color: black;
 }
+.row.action {
+    opacity: 0;
+	background: "";
+}
+.row.action:hover{
+    opacity: 0.5;
+}

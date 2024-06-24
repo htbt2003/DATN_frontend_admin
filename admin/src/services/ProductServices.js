@@ -1,9 +1,12 @@
 import httpAxios from "../httpAxios";
 
-
-function getAll(page)
+function getAll(page, condition)
 {
-    return httpAxios.get(`product/index?page=${page}`);
+    return httpAxios.get(`product/index?page=${page}`, {
+        params: {
+          ...condition,
+        },
+      });
 }
 function getById(id)
 {
@@ -57,10 +60,6 @@ function getSearch(key)
 {
     return httpAxios.get(`search?key=${key}`);
 }
-function getProducts(page)
-{
-    return httpAxios.get(`products?page=${page}`);
-}
 
 const ProductService = {
     getAll:getAll,
@@ -77,10 +76,6 @@ const ProductService = {
     changeStatus:(id) =>
     {
         return httpAxios.get("product/change_status/" + id);
-    },
-    filter:(category_id=0, brand_id=0) =>
-    {
-        return httpAxios.get(`product/filter/${category_id}/${brand_id}`);
     },
     delete:(id) =>
     {
@@ -110,5 +105,14 @@ const ProductService = {
     {
         return httpAxios.get(`products?page=${page}`);
     },
+    action_destroy:(data) =>
+    {
+        return httpAxios.post("product/action_destroy", data);
+    },
+    action_trash:(data) =>
+    {
+        return httpAxios.post("product/action_destroy", data);
+    },
+    
 }
 export default ProductService;
