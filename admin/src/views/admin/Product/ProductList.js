@@ -248,7 +248,7 @@ function ProductList() {
           <div className='flex flex-row flex-wrap'>
             <p className="shrink text-[33px]  text-navy-700 dark:text-white">
               <a className="font-bold  hover:text-navy-700 dark:hover:text-white" href="/admin/product">
-                Tất cả product
+                Danh sách sản phẩm
               </a>
             </p>
             <Link to={"/admin/product/create"}>

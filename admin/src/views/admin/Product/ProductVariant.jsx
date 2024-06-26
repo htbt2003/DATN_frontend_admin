@@ -22,7 +22,7 @@ const ProductVariant = ({ product, setShowModal }) => {
     }
     return results;
   };
-
+  console.log(product.productattributes)
   useEffect(() => {
     const combinations = createVariantCombination(product.productattributes);
     const newVariants = combinations.map((combination) => ({
@@ -82,7 +82,7 @@ const ProductVariant = ({ product, setShowModal }) => {
     newVariants[index].SKU = e.target.value;
     setVariants(newVariants);
   };
-
+console.log(variants)
 
   return (
     <>
