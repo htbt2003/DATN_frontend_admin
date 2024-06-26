@@ -13,7 +13,7 @@ export function SidebarLinks({routes, parent}) {
 
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
-    return location.pathname === routeName;
+    return location.pathname === routeName || location.pathname.includes(routeName);
   };
 
   const createLinks = (routes) => {

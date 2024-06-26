@@ -1,9 +1,13 @@
 import httpAxios from "../httpAxios";
 
 
-function getAll(page)
+function getAll(page, condition)
 {
-    return httpAxios.get(`productsale/index?page=${page}`);
+    return httpAxios.get(`productsale/index?page=${page}`, {
+        params: {
+          ...condition,
+        },
+      });
 }
 function getById(id)
 {
@@ -58,5 +62,11 @@ const ProductSaleServices = {
     getProductByCategoryId:getProductByCategoryId,
     getProductByBrandId:getProductByBrandId,
     getProductSearch:getProductSearch,
+    action_destroy: (data) => {
+        return httpAxios.post("productsale/action_destroy", data);
+    },
+    action_trash: (data) => {
+        return httpAxios.post("productsale/action_destroy", data);
+    },
 }
 export default ProductSaleServices;

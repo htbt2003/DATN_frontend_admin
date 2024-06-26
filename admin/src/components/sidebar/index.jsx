@@ -125,7 +125,7 @@ const Sidebar = ({ open, onClose }) => {
               {/* </div> */}
             </div>
             <ul className={`mb-auto pt-1 ${QLBH ? 'max-h-[500px] transition-max-h duration-700 ease-in-out' : 'max-h-0 overflow-hidden transition-max-h duration-700 ease-in-out'}`}>
-              <Links routes={routes} parent={'sanpham'} />
+              <Links routes={routes} parent={'QLBH'} />
             </ul>
           </li>
         </div>

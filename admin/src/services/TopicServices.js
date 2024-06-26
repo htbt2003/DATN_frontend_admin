@@ -1,9 +1,13 @@
 import httpAxios from "../httpAxios";
 
 
-function getAll(page)
+function getAll(page, condition)
 {
-    return httpAxios.get(`topic/index?page=${page}`);
+    return httpAxios.get(`topic/index?page=${page}`, {
+        params: {
+          ...condition,
+        },
+      });
 }
 function getById(id)
 {
@@ -50,9 +54,19 @@ const TopicService = {
     {
         return httpAxios.get("topic/restore/" + id);
     },
-    trash:(page) =>
+    trash:(page, condition) =>
     {
-        return httpAxios.get(`topic/trash?page=${page}`);
+        return httpAxios.get(`topic/trash?page=${page}`, {
+            params: {
+              ...condition,
+            },
+          });
+    },
+    action_destroy: (data) => {
+        return httpAxios.post("topic/action_destroy", data);
+    },
+    action_trash: (data) => {
+        return httpAxios.post("topic/action_destroy", data);
     },
 }
 export default TopicService;

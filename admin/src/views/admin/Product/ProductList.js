@@ -14,7 +14,7 @@ import { LiaToggleOffSolid } from "react-icons/lia";
 
 function ProductList() {
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState();
+  const [total, setTotal] = useState(0);
   const [load, setLoad] = useState(false);
   const [reLoad, setReLoad] = useState();
   const [products, setProducts] = useState([]);
@@ -29,8 +29,8 @@ function ProductList() {
   const [action, setAction] = useState();
   var condition = {
     keySearch: keySearch,
-    brandId:brandId,
-    catId:catId
+    brandId: brandId,
+    catId: catId
   }
   // const notifySuccess = () => toast.success("Success Notification!");
   // const notifyError = () => toast.error("Error Notification!");
@@ -93,7 +93,7 @@ function ProductList() {
   function handleStatus(product) {
     swal({
       title: "Cảnh báo",
-      text: product.status==1?"Tạm thời ngưng bán sản phẩm này?":"Mở bán lại sản phẩm này?",
+      text: product.status == 1 ? "Tạm thời ngưng bán sản phẩm này?" : "Mở bán lại sản phẩm này?",
       icon: "warning",
       buttons: {
         cancel: "Không",
@@ -179,54 +179,64 @@ function ProductList() {
     // clearTimeout(time);
     // time = setTimeout(setReLoad(Date.now()), 10000);
   };
-
+    //chọn danh muc----------------
+    const handleCat = (event) => {
+      setCatId(event.target.value);
+      setReLoad(Date.now())
+    };
+  //search time----------------
+  const handleBrand = (event) => {
+    setBrandId(event.target.value);
+    setReLoad(Date.now())
+  };
+  
   const RowMenu = ({ product, index }) => {
     return (
-<tr key={index} className="row group hover:bg-gray-100 dark:hover:bg-gray-800 relative ">
-  <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white flex items-center gap-2">
-    <input
-      type="checkbox"
-      className="defaultCheckbox relative flex h-[20px] min-h-[20px] w-[20px] min-w-[20px] appearance-none items-center 
+      <tr key={index} className="row group hover:bg-gray-100 dark:hover:bg-gray-800 relative ">
+        <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white flex items-center gap-2">
+          <input
+            type="checkbox"
+            className="defaultCheckbox relative flex h-[20px] min-h-[20px] w-[20px] min-w-[20px] appearance-none items-center 
  justify-center rounded-md border border-gray-500 text-white/0 outline-none transition duration-[0.2s]
  checked:border-none checked:text-white hover:cursor-pointer dark:border-white/10 checked:bg-brand-500 dark:checked:bg-brand-400"
-      id={"category" + product.id}
-      onChange={() => handleCheckbox(product.id)}
-      checked={selectedproducts.includes(product.id)}
-    />
-    <img className="flex h-28 w-24 items-center justify-center rounded-xl" src={urlImage + "product/" + product.image} alt="hinh" />
-  </td>
-  <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white relative">
-    <div className=''>
-      <p>{product.name}</p>
-      <div className="absolute top-200 right-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-wrap flex-row ml-2 mt-2">
-        <button onClick={() => handleStatus(product)} className='mr-2'>
-          {product.status === 1 ? <IoToggle color='green'/> : <LiaToggleOffSolid/>}
-        </button>
-        <Link to={"/admin/product/update/" + product.id} className="text-blue-500 mr-2">
-          <FaEdit />
-        </Link>
-        <button href="#" className="text-[#ef4444]" onClick={() => productDelete(product.id)}>
-          <FaTrash />
-        </button>
-      </div>
-    </div>
-  </td>
-  <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
-    {product.categoryname}
-  </td>
-  <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
-    {product.brandname}
-  </td>
-  <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
-    {product.price}
-  </td>
-  <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
-    {product.sum_qty_store}
-  </td>
-  <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
-    {product.sum_qty_store-product.sum_qty_selled}
-  </td>
-</tr>
+            id={"category" + product.id}
+            onChange={() => handleCheckbox(product.id)}
+            checked={selectedproducts.includes(product.id)}
+          />
+          <img className="flex h-28 w-24 items-center justify-center rounded-xl" src={urlImage + "product/" + product.image} alt="hinh" />
+        </td>
+        <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white relative">
+          <div className=''>
+            <p>{product.name}</p>
+            <div className="absolute top-200 right-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-wrap flex-row ml-2 mt-2">
+              <button onClick={() => handleStatus(product)} className='mr-2'>
+                {product.status === 1 ? <IoToggle color='green' /> : <LiaToggleOffSolid />}
+              </button>
+              <Link to={"/admin/product/update/" + product.id} className="text-blue-500 mr-2">
+                <FaEdit />
+              </Link>
+              <button href="#" className="text-[#ef4444]" onClick={() => productDelete(product.id)}>
+                <FaTrash />
+              </button>
+            </div>
+          </div>
+        </td>
+        <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
+          {product.categoryname}
+        </td>
+        <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
+          {product.brandname}
+        </td>
+        <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
+          {product.price}
+        </td>
+        <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
+          {product.sum_qty_store}
+        </td>
+        <td className="pt-[14px] pb-[16px] sm:text-[14px] text-sm font-bold text-navy-700 dark:text-white">
+          {product.sum_qty_store - product.sum_qty_selled}
+        </td>
+      </tr>
     );
   };
 
@@ -258,7 +268,7 @@ function ProductList() {
         <div className='flex flex-row flex-wrap mb-5 items-center'>
           <div className='flex'>
             <div className="mr-2 ">
-              <select name="" className="border border-dark rounded mt-2 flex h-9 w-full items-center justify-center rounded-xl border p-2 text-sm outline-none" onChange={(e) => setAction(e.target.value)}>
+              <select name="" className="focus:border-sky-500 focus:ring-1 focus:ring-sky-500 border border-dark rounded mt-2 flex h-9 w-full items-center justify-center rounded-xl border p-2 text-sm outline-none" onChange={(e) => setAction(e.target.value)}>
                 <option value="">Hành động</option>
                 <option value="trash">Bỏ vào thùng rác</option>
               </select>
@@ -273,8 +283,8 @@ function ProductList() {
                 )
             }
             <div className="mr-2 ">
-              <select name="" className="border border-dark rounded mt-2 flex h-9 w-full items-center justify-center rounded-xl border p-2 text-sm outline-none" onChange={(e) => setCatId(e.target.value)}>
-                <option value={0}>Danh mục</option>
+              <select name="" className="focus:border-sky-500 focus:ring-1 focus:ring-sky-500 border border-dark rounded mt-2 flex h-9 w-full items-center justify-center rounded-xl border p-2 text-sm outline-none" onChange={(e) => handleCat(e)}>
+                <option value="">Danh mục</option>
                 {categories && categories.length > 0 && categories.map(function (category, index) {
                   return (
                     <option value={category.id} key={index}>{category.name}</option>
@@ -283,9 +293,8 @@ function ProductList() {
               </select>
             </div>
             <div className="mr-2 ">
-              <select name="" className="border border-dark rounded mt-2 flex h-9 w-full items-center justify-center rounded-xl border p-2 text-sm outline-none" onChange={(e) => setBrandId(e.target.value)}>
-                <option value={0}>Danh mục</option>
-                <option value={0}>Thương hiệu</option>
+              <select name="" className="focus:border-sky-500 focus:ring-1 focus:ring-sky-500 border border-dark rounded mt-2 flex h-9 w-full items-center justify-center rounded-xl border p-2 text-sm outline-none" onChange={(e) => handleBrand(e)}>
+                <option value="">Thương hiệu</option>
                 {brands && brands.length > 0 && brands.map(function (brand, index) {
                   return (
                     <option value={brand.id} key={index}>{brand.name}</option>
@@ -310,7 +319,7 @@ function ProductList() {
           </div>
         </div>
 
-        <Card extra={"w-full h-full sm:overflow-auto px-6"}>
+        <Card extra={"w-full h-full sm:overflow-auto p-6"}>
           <div className="mt-8 overflow-x-scroll xl:overflow-x-hidden">
             <table
               className="w-full"
@@ -376,30 +385,34 @@ function ProductList() {
           </div>
         </Card>
         <ReactPaginate
-          className="flex justify-end items-center mt-3"
-          previousLabel={<div className="flex ml-1 pt-2 pb-2 text-product-500">
-            <FaChevronLeft size="0.6rem" />
-            <FaChevronLeft size="0.6rem" className="-translate-x-1/2" />
-          </div>}
-          nextLabel={<div className="flex ml-1 pt-2 pb-2 text-product-500">
-            <FaChevronRight size="0.6rem" />
-            <FaChevronRight size="0.6rem" className="-translate-x-1/2" />
-          </div>}
-          pageCount={numberPage}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={3}
-          onPageChange={handlePageChange}
-          containerClassName="pagination"
-          pageClassName="inline-block mx-1"
-          pageLinkClassName="block px-3 py-2 rounded-lg text-product-500 bg-white"
-          previousClassName="inline-block mx-1"
-          previousLinkClassName="block px-3 py-2 rounded-lg bg-white "
-          nextClassName="inline-block mx-1"
-          nextLinkClassName="block px-3 py-2 rounded-lg bg-white "
-          activeClassName="activePagination"
-          renderOnZeroPageCount={null}
-        />
-      </div>
+            className="flex justify-end items-center mt-3"
+            previousLabel={
+              <div className="flex ml-1 pt-2 pb-2 text-brand-500">
+                <FaChevronLeft size="0.6rem" />
+                <FaChevronLeft size="0.6rem" className="-translate-x-1/2" />
+              </div>
+            }
+            nextLabel={
+              <div className="flex ml-1 pt-2 pb-2 text-brand-500">
+                <FaChevronRight size="0.6rem" />
+                <FaChevronRight size="0.6rem" className="-translate-x-1/2" />
+              </div>
+            }
+            pageCount={numberPage}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={3}
+            onPageChange={handlePageChange}
+            containerClassName="pagination"
+            pageClassName="inline-block mx-1"
+            pageLinkClassName="block px-3 py-2 rounded-lg text-brand-500 bg-white"
+            previousClassName="inline-block mx-1"
+            previousLinkClassName="block px-3 py-2 rounded-lg bg-white text-black"
+            nextClassName="inline-block mx-1"
+            nextLinkClassName="block px-3 py-2 rounded-lg bg-white text-black"
+            activeClassName="activePagination"
+            renderOnZeroPageCount={null}
+          /> 
+        </div>
     </>
 
   );

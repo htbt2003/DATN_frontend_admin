@@ -28,5 +28,11 @@ const ProductStoreService = {
     create:create,
     update:update,
     remove:remove,
+    action_destroy: (data) => {
+        return httpAxios.post("productstore/action_destroy", data);
+    },
+    action_trash: (data) => {
+        return httpAxios.post("productstore/action_destroy", data);
+    },
 }
 export default ProductStoreService;

@@ -1,9 +1,13 @@
 import httpAxios from "../httpAxios";
 
 
-function getAll(page)
+function getAll(page, condition)
 {
-    return httpAxios.get(`category/index?page=${page}`);
+    return httpAxios.get(`category/index?page=${page}`, {
+        params: {
+          ...condition,
+        },
+      });
 }
 function getById(id)
 {
@@ -50,9 +54,19 @@ const CategoryService = {
     {
         return httpAxios.get("category/restore/" + id);
     },
-    trash:(page) =>
+    trash:(page, condition) =>
     {
-        return httpAxios.get(`category/trash?page=${page}`);
-    }
+        return httpAxios.get(`category/trash?page=${page}`, {
+            params: {
+              ...condition,
+            },
+          });
+    },
+    action_destroy: (data) => {
+        return httpAxios.post("category/action_destroy", data);
+    },
+    action_trash: (data) => {
+        return httpAxios.post("category/action_destroy", data);
+    },
 }
 export default CategoryService;

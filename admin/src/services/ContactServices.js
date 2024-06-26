@@ -1,9 +1,13 @@
 import httpAxios from "../httpAxios";
 
 
-function getAll(page)
+function getAll(page, condition)
 {
-    return httpAxios.get(`contact/index?page=${page}`);
+    return httpAxios.get(`contact/index?page=${page}`, {
+        params: {
+          ...condition,
+        },
+      });
 }
 function getById(id)
 {
@@ -39,9 +43,19 @@ const ContactService = {
     {
         return httpAxios.get("contact/restore/" + id);
     },
-    trash:(page) =>
+    trash:(page, condition) =>
     {
-        return httpAxios.get(`contact/trash?page=${page}`);
-    }
+        return httpAxios.get(`contact/trash?page=${page}`, {
+            params: {
+              ...condition,
+            },
+          });
+    },
+    action_destroy: (data) => {
+        return httpAxios.post("contact/action_destroy", data);
+    },
+    action_trash: (data) => {
+        return httpAxios.post("contact/action_destroy", data);
+    },
 }
 export default ContactService;

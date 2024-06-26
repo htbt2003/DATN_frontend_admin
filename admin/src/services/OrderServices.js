@@ -1,9 +1,13 @@
 import httpAxios from "../httpAxios";
 
 
-function getAll(page)
+function getAll(page, condition)
 {
-    return httpAxios.get(`order/index?page=${page}`);
+    return httpAxios.get(`order/index?page=${page}`, {
+        params: {
+          ...condition,
+        },
+      });
 }
 function getById(id)
 {
@@ -50,13 +54,23 @@ const OrderService = {
     {
         return httpAxios.get("order/restore/" + id);
     },
-    trash:(page) =>
+    trash:(page, condition) =>
     {
-        return httpAxios.get(`order/trash?page=${page}`);
+        return httpAxios.get(`order/trash?page=${page}`, {
+            params: {
+              ...condition,
+            },
+          });
     },
     orderDetail:(order_id) =>
     {
         return httpAxios.get("orderDetail/" + order_id);
+    },
+    action_destroy: (data) => {
+        return httpAxios.post("order/action_destroy", data);
+    },
+    action_trash: (data) => {
+        return httpAxios.post("order/action_destroy", data);
     },
 }
 export default OrderService;

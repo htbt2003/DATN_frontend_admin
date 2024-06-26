@@ -1,9 +1,13 @@
 import httpAxios from "../httpAxios";
 
 //backend
-function getAll(page)
+function getAll(page, condition)
 {
-    return httpAxios.get(`menu/index?page=${page}`);
+    return httpAxios.get(`menu/index?page=${page}`, {
+        params: {
+          ...condition,
+        },
+      });
 }
 function getById(id)
 {
@@ -54,9 +58,19 @@ const MenuService = {
     {
         return httpAxios.get("menu/restore/" + id);
     },
-    trash:(page) =>
+    trash:(page, condition) =>
     {
-        return httpAxios.get(`menu/trash?page=${page}`);
-    }
+        return httpAxios.get(`menu/trash?page=${page}`, {
+            params: {
+              ...condition,
+            },
+          });
+    },
+    action_destroy: (data) => {
+        return httpAxios.post("menu/action_destroy", data);
+    },
+    action_trash: (data) => {
+        return httpAxios.post("menu/action_destroy", data);
+    },
 }
 export default MenuService;

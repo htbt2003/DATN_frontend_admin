@@ -139,8 +139,8 @@ function ProductSaleList() {
                                             <div className=''>{product.name}</div>
                                           </div>
                                         </td>
-                                        <td> {product.category_name} </td>
-                                        <td> {product.brand_name} </td>
+                                        <td> {product.categoryname} </td>
+                                        <td> {product.brandname} </td>
                                         <td> 
                                           <input type='text' id={"pricesale" + product.id}/>
                                         </td>

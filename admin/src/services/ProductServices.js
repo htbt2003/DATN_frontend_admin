@@ -85,9 +85,13 @@ const ProductService = {
     {
         return httpAxios.get("product/restore/" + id);
     },
-    trash:(page) =>
+    trash:(page, condition) =>
     {
-        return httpAxios.get(`product/trash?page=${page}`);
+        return httpAxios.get(`product/trash?page=${page}`, {
+            params: {
+              ...condition,
+            },
+          });
     },
     getProductNew:(limit) =>
     {
@@ -101,9 +105,9 @@ const ProductService = {
     {
         return httpAxios.get(`product_bestSeller/${limit}`);
     },
-    getProducts:(page) =>
+    getProductStore:(page) =>
     {
-        return httpAxios.get(`products?page=${page}`);
+        return httpAxios.get(`product_stores?page=${page}`);
     },
     action_destroy:(data) =>
     {
