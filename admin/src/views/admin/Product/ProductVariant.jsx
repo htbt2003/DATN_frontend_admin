@@ -3,6 +3,7 @@ import { CiTrash } from "react-icons/ci";
 import VariantServices from '../../../services/VariantServices';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import httpAxios from "httpAxios";
 
 const ProductVariant = ({ product, setShowModal }) => {
   const [variants, setVariants] = useState([]);
@@ -28,7 +29,7 @@ const ProductVariant = ({ product, setShowModal }) => {
     const newVariants = combinations.map((combination) => ({
       name: product.name,
       price: product.price,
-      SKU: '',
+      SKU: null,
       values: combination,
     }));
     setVariants(newVariants);
@@ -48,13 +49,23 @@ const ProductVariant = ({ product, setShowModal }) => {
       });
     });
 
-    // Displaying form data entries in console
-    for (let pair of newVariantsFormData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
+    // for (let pair of newVariantsFormData.entries()) {
+    //   console.log(`${pair[0]}: ${pair[1]}`);
+    // }
+    // const formDataObj = {};
+    // newVariantsFormData.forEach((value, key) => {
+    //   formDataObj[key] = value;
+    // });
+    // const jsonData = JSON.stringify(formDataObj);
+    // console.log(jsonData);
 
     try {
-      const result = await VariantServices.create_variants(newVariantsFormData);
+    //   httpAxios.post('/variant/store', newVariantsFormData)
+    // .then(response => {
+    //     // console.log('Response:', response);
+    //     toast.success(response.message);
+    // })
+      const result = await VariantServices.create(newVariantsFormData);
       setShowModal(false);
       navigator("/admin/product", { replace: true });
       toast.success(result.message);
@@ -82,7 +93,7 @@ const ProductVariant = ({ product, setShowModal }) => {
     newVariants[index].SKU = e.target.value;
     setVariants(newVariants);
   };
-console.log(variants)
+// console.log(variants)
 
   return (
     <>

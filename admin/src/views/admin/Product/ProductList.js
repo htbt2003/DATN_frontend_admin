@@ -27,6 +27,7 @@ function ProductList() {
   const [keySearch, setKeyearch] = useState("");
   const [selectedproducts, setSelectedproducts] = useState([]);
   const [action, setAction] = useState();
+  document.title = "Danh sách sản phẩm";
   var condition = {
     keySearch: keySearch,
     brandId: brandId,

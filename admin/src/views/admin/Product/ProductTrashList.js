@@ -14,6 +14,7 @@ import { LiaToggleOffSolid } from "react-icons/lia";
 import { TbRestore } from "react-icons/tb";
 
 function ProductTrashList() {
+  document.title = "Danh sách sản phẩm rác";
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [load, setLoad] = useState(false);

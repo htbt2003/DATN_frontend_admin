@@ -8,6 +8,7 @@ import TinyMCE from 'components/tiny';
 import ProductAttribute from './ProductAttribute';
 import ProductVariant from './ProductVariant';
 import { toast } from 'react-toastify';
+import { urlImage } from 'config';
 
 function ProductCreate() {
     const {id} = useParams();
@@ -24,7 +25,8 @@ function ProductCreate() {
   const [metadesc, setMetadesc] = useState("");
   const [status, setStatus] = useState(1);
   const [images, setImages] = useState([]);
-  
+  document.title = name;
+
   const [showModal, setShowModal] = useState(false);
   const [isVariant, setIsVariant] = useState('0');
   const [product1, setProduct1] = useState();
@@ -176,7 +178,7 @@ const handleImageChange = (event) => {
                   <label>
                     <strong>Chi tiết (*)</strong>
                   </label>
-                  <TinyMCE setValue={setDetail} detail={detail} />
+                  <TinyMCE setValue={setDetail} placeholder={detail} />
                 </div>
 
                 <div className="mb-3">
@@ -222,10 +224,14 @@ const handleImageChange = (event) => {
                         (
                           <div className="flex flex-wrap p-5 absolute top-0 right-0 left-0 m-auto">
                             {
-                              images.map((image, index) => (
+                              images.map((item, index) => (
                                 <div key={index} className="relative inline-block m-2">
+                                  {
+
+                                  }
                                   <img
-                                    src={URL.createObjectURL(image)}
+                                    src={urlImage + "pro_image/" + item.image}
+                                    // src={URL.createObjectURL(image)}
                                     alt=""
                                     className="w-[100px] h-[100px] object-cover rounded"
                                   />

@@ -10,6 +10,7 @@ import ProductVariant from './ProductVariant';
 import { toast } from 'react-toastify';
 
 function ProductCreate() {
+  document.title = "Tạo sản phẩm";
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
   const [attributes, setAttributes] = useState([]);
@@ -33,7 +34,7 @@ function ProductCreate() {
       values: [""],
     },
   ]);
-  console.log(optionAttrs)
+  console.log(images)
   const fetchAPI = async () => {
     try {
       const result = await BrandServices.getAll();

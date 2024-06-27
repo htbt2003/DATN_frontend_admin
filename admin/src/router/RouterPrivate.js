@@ -12,7 +12,7 @@ import CategoryCreate from '../views/admin/Category/CategoryCreate';
 import CategoryUpdate from '../views/admin/Category/CategoryUpdate';
 
 import ProductList from '../views/admin/Product/ProductList';
-import ProductShow from '../views/admin/Product/ProductShow';
+// import ProductShow from '../views/admin/Product/ProductShow';
 import ProductCreate from '../views/admin/Product/ProductCreate';
 import ProductUpdate from '../views/admin/Product/ProductUpdate';
 
@@ -98,7 +98,7 @@ const RouterPrivate = [
 
   { path: "/admin/product", component: ProductList, name:'Danh sách sản phẩm', parent:'sanpham' },
   { path: "/admin/product/trash", component: ProductTrashList },
-  { path: "/admin/product/show/:id", component: ProductShow },
+  // { path: "/admin/product/show/:id", component: ProductShow },
   { path: "/admin/product/create", component: ProductCreate },
   { path: "/admin/product/update/:id", component: ProductUpdate },
 
