@@ -11,16 +11,35 @@ import {
   IoMdInformationCircleOutline,
 } from "react-icons/io";
 import avatar from "assets/img/avatars/avatar4.png";
+import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
+import UserServices from '../../services/UserServices';
+import { clearAuth } from "../../redux/authSlice";
+import { urlImage } from "config";
 
 const Navbar = () => {
   // const { onOpenSidenav, brandText } = props;
   const [darkmode, setDarkmode] = React.useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+
+  const logoutSubmit = async () => {
+    try {
+      const result = await UserServices.logout();
+      dispatch(clearAuth())
+      swal("Success", result.message, "success");
+      navigator("/auth/sign-in", { replace: true })
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <nav className="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rounded-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
       <div className="ml-[6px]">
         <div className="h-6 w-[224px] pt-1">
-          <a
+          {/* <a
             className="text-sm font-normal text-navy-700 hover:underline dark:text-white dark:hover:text-white"
             href=" "
           >
@@ -29,7 +48,7 @@ const Navbar = () => {
               {" "}
               /{" "}
             </span>
-          </a>
+          </a> */}
           {/* <Link
             className="text-sm font-normal capitalize text-navy-700 hover:underline dark:text-white dark:hover:text-white"
             to="#"
@@ -48,7 +67,7 @@ const Navbar = () => {
       </div>
 
       <div className="relative mt-[3px] flex h-[61px] w-[355px] flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-shadow-500 dark:!bg-navy-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
-        <div className="flex h-full items-center rounded-full bg-lightPrimary text-navy-700 dark:bg-navy-900 dark:text-white xl:w-[225px]">
+        {/* <div className="flex h-full items-center rounded-full bg-lightPrimary text-navy-700 dark:bg-navy-900 dark:text-white xl:w-[225px]">
           <p className="pl-3 pr-2 text-xl">
             <FiSearch className="h-4 w-4 text-gray-400 dark:text-white" />
           </p>
@@ -57,7 +76,7 @@ const Navbar = () => {
             placeholder="Search..."
             class="block h-full w-full rounded-full bg-lightPrimary text-sm font-medium text-navy-700 outline-none placeholder:!text-gray-400 dark:bg-navy-900 dark:text-white dark:placeholder:!text-white sm:w-fit"
           />
-        </div>
+        </div> */}
         <span
           className="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
           // onClick={onOpenSidenav}
@@ -180,7 +199,7 @@ const Navbar = () => {
           button={
             <img
               className="h-10 w-10 rounded-full"
-              src={avatar}
+              src={urlImage + "user/" + user.image}
               alt="Elon Musk"
             />
           }
@@ -189,7 +208,7 @@ const Navbar = () => {
               <div className="p-4">
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-bold text-navy-700 dark:text-white">
-                    👋 Hey, Adela
+                    👋 {user.name}
                   </p>{" "}
                 </div>
               </div>
@@ -200,20 +219,20 @@ const Navbar = () => {
                   href=" "
                   className="text-sm text-gray-800 dark:text-white hover:dark:text-white"
                 >
-                  Profile Settings
+                  Thiết lập hồ sơ
                 </a>
-                <a
+                {/* <a
                   href=" "
                   className="mt-3 text-sm text-gray-800 dark:text-white hover:dark:text-white"
                 >
                   Newsletter Settings
-                </a>
-                <a
-                  href=" "
+                </a> */}
+                <button
+                  onClick={logoutSubmit}
                   className="mt-3 text-sm font-medium text-red-500 hover:text-red-500 transition duration-150 ease-out hover:ease-in"
                 >
-                  Log Out
-                </a>
+                  Đăng xuất
+                </button>
               </div>
             </div>
           }

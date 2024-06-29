@@ -17,6 +17,7 @@ function create(data)
 {
     return httpAxios.post("contact/store", data);
 }
+
 function update(data, id)
 {
     return httpAxios.post("contact/update/" + id, data);

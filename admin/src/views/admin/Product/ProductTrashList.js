@@ -271,7 +271,7 @@ function ProductTrashList() {
             <div className="mr-2 ">
               <select name="" className="focus:border-sky-500 focus:ring-1 focus:ring-sky-500 border border-dark rounded mt-2 flex h-9 w-full items-center justify-center rounded-xl border p-2 text-sm outline-none" onChange={(e) => setAction(e.target.value)}>
                 <option value="">Hành động</option>
-                <option value="trash">Bỏ vào thùng rác</option>
+                <option value="trash">Xóa</option>
               </select>
             </div>
             {

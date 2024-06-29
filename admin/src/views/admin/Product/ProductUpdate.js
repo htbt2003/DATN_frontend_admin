@@ -152,7 +152,7 @@ const handleImageChange = (event) => {
             </a>
           </p>
           <div className="mb-4 text-right">
-            <Link className="linear mb-4 rounded bg-brand-500 px-2 py-2 text-base text-white hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200" to={"/admin/product"}>
+            <Link className="linear mb-4 rounded bg-brand-500 px-2 py-2 text-base text-white hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200" onClick={()=>navigator("/admin/product")}>
               Về danh sách
             </Link>
           </div>

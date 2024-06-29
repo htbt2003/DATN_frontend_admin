@@ -16,8 +16,6 @@ const Sidebar = ({ open, onClose }) => {
   const activeRoute = (routeName) => {
     return location.pathname === routeName;
   };
-  console.log(activeRoute('/admin'))
-  console.log(activeRoute('/admin/brand'))
   return (
     <div
       className={`sm:none duration-175 linear fixed !z-50 flex min-h-full flex-col bg-white pb-10 shadow-2xl shadow-white/5 transition-all dark:!bg-navy-800 dark:text-white md:!z-50 lg:!z-50 xl:!z-0 ${open ? "translate-x-0" : "-translate-x-96"
@@ -140,7 +138,17 @@ const Sidebar = ({ open, onClose }) => {
             )}
           </li>
         </Link>
-
+        <Link className="relative mb-3 flex hover:cursor-pointer" to={'/admin/contact'}>
+          <li className="my-[3px] flex cursor-pointer items-center px-8">
+            <span className={`${activeRoute('/admin/contact') ? "font-bold text-brand-500 dark:text-white" : "font-medium text-gray-600"}`}>
+              <MdHome size='23' />
+            </span>
+            <p className={`leading-1 ml-4 flex ${activeRoute('/admin/contact') ? "font-bold text-navy-700 dark:text-white" : "font-medium text-gray-600"}`}>Liên hệ</p>
+            {activeRoute('/admin/contact') && (
+              <div className="absolute right-0 top-px h-9 w-1 rounded-lg bg-brand-500 dark:bg-brand-400" />
+            )}
+          </li>
+        </Link>
         <div className="relative mb-3 hover:cursor-pointer" onClick={() => setBaiViet(prevState => !prevState)}>
           <li className="my-[3px] cursor-pointer items-center px-8">
               <div className="flex items-center justify-between">
@@ -216,7 +224,7 @@ const Sidebar = ({ open, onClose }) => {
               {/* </div> */}
             </div>
             <ul className={`mb-auto pt-1 ${GiaoDien ? 'max-h-[500px] transition-max-h duration-700 ease-in-out' : 'max-h-0 overflow-hidden transition-max-h duration-700 ease-in-out'}`}>
-              <Links routes={routes} parent={'sanpham'} />
+              <Links routes={routes} parent={'giaodien'} />
             </ul>
           </li>
         </div>
@@ -256,7 +264,7 @@ const Sidebar = ({ open, onClose }) => {
               {/* </div> */}
             </div>
             <ul className={`mb-auto pt-1 ${HeThong ? 'max-h-[500px] transition-max-h duration-700 ease-in-out' : 'max-h-0 overflow-hidden transition-max-h duration-700 ease-in-out'}`}>
-              <Links routes={routes} parent={'sanpham'} />
+              <Links routes={routes} parent={'hethong'} />
             </ul>
           </li>
         </div>

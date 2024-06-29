@@ -105,6 +105,7 @@ const RouterPrivate = [
 { path: "/admin/ProductStore", component:ProductStoreList, name:'Kho hàng', parent:'sanpham' },
 
 { path: "/admin/productSale", component: ProductSaleList, name:'Khuyến mãi', parent:'sanpham' },
+
   { path: "/admin/contact", component: ContactList },
   { path: "/admin/contact/trash", component: ContactTrashList },
   { path: "/admin/contact/show/:id", component: ContactShow },
@@ -134,7 +135,7 @@ const RouterPrivate = [
   { path: "/admin/page/create", component: PageCreate },
   { path: "/admin/page/update/:id", component: PageUpdate },
 
-  { path: "/admin/banner", component: BannerList, name:'Banner', parent:'GiaoDien' },
+  { path: "/admin/banner", component: BannerList, name:'Banner', parent:'giaodien' },
   { path: "/admin/banner/trash", component: BannerTrashList },
   { path: "/admin/banner/show/:id", component: BannerShow },
   { path: "/admin/banner/create", component: BannerCreate },
